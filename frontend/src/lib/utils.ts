@@ -1,0 +1,62 @@
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+import type { taxResultProps } from "../TaxResult";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+export const initialData: taxResultProps = {
+  summary: {
+    gross_annual: 50000,
+    net_annual: 39092.8,
+    net_monthly_12: 3257.73,
+    net_monthly_13: 3007.14,
+  },
+  deductions: {
+    social_insurance: 4400,
+    ghs: 1325,
+    income_tax: 5182.2,
+    family_deduction: 0,
+    total_deductions: 10907.2,
+  },
+  details: {
+    income_tax_breakdown: [
+      {
+        lower_bound: 0,
+        upper_bound: 22000,
+        rate: 0,
+        taxable_amount: 22000,
+        tax: 0,
+      },
+      {
+        lower_bound: 22000,
+        upper_bound: 32000,
+        rate: 0.2,
+        taxable_amount: 10000,
+        tax: 2000,
+      },
+      {
+        lower_bound: 32000,
+        upper_bound: 42000,
+        rate: 0.25,
+        taxable_amount: 10000,
+        tax: 2500,
+      },
+      {
+        lower_bound: 42000,
+        upper_bound: 72000,
+        rate: 0.3,
+        taxable_amount: 2274,
+        tax: 682.2,
+      },
+      {
+        lower_bound: 72000,
+        upper_bound: null,
+        rate: 0.35,
+        taxable_amount: 0,
+        tax: 0,
+      },
+    ],
+  },
+};
