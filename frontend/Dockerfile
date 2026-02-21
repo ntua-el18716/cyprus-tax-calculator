@@ -4,13 +4,13 @@ FROM node:25-alpine AS builder
 WORKDIR /app
 
 # Copy package files
-COPY frontend/package*.json ./
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
 # Copy source code
-COPY frontend/ .
+COPY . .
 
 # Accept API URL as build argument
 ARG VITE_API_URL
