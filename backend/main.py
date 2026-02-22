@@ -16,6 +16,7 @@ app.add_middleware(
         "http://localhost",
         "http://localhost:80",
         "http://localhost:3000",
+        "https://cyprus-tax-calculator-frontend.onrender.com/",
     ],
     allow_credentials=True,  # Allow cookies/auth headers
     allow_methods=["*"],  # Allow all HTTP methods (GET, POST, etc)
