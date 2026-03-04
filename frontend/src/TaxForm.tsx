@@ -2,14 +2,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm, useWatch } from "react-hook-form";
 import * as z from "zod";
-import { Calculator } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "./components/ui/card";
 import {
   Field,
   FieldError,
@@ -87,165 +79,159 @@ export function TaxForm({ onFormChange }: TaxFormProps) {
   }, [watchedValues, onFormChange]);
 
   return (
-    <div>
-      <Card className="w-full">
-        <CardHeader>
-          <CardTitle className="text-3xl text-center py-3">
-            Tax Calculator
-          </CardTitle>
-          <CardDescription>
-            A tax calculator for the new Tax System 2026
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <FieldGroup>
-            <Controller
-              name="grossIncome"
-              control={form.control}
-              render={({ field, fieldState }) => (
-                <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel
-                    htmlFor="gross-income"
-                    className="flex items-center gap-2 text-lg font-semibold"
-                  >
-                    <Calculator className="size-5 text-primary" />
-                    Annual Gross Salary
-                  </FieldLabel>
-                  <div className="relative">
-                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground text-2xl">
-                      €
-                    </span>
-                    <Input
-                      id="gross-income"
-                      type="text"
-                      value={field.value.toLocaleString()}
-                      onChange={(e) => {
-                        const value = e.target.value.replace(/[^0-9]/g, "");
-                        const numValue = value === "" ? 0 : parseInt(value, 10);
-                        field.onChange(numValue);
-                      }}
-                      aria-invalid={fieldState.invalid}
-                      autoComplete="off"
-                      className="pl-12 text-3xl! font-bold h-16"
-                    />
-                  </div>
-                  <Slider
-                    value={[field.value]}
-                    onValueChange={(values) => field.onChange(values[0])}
-                    min={0}
-                    max={200000}
-                    step={1000}
-                    className="mt-4"
-                  />
-                  <div className="flex justify-between text-sm text-muted-foreground mt-2">
-                    <span>€0</span>
-                    <span>€100,000</span>
-                    <span>€200,000</span>
-                  </div>
-                  {fieldState.invalid && (
-                    <FieldError errors={[fieldState.error]} />
-                  )}
-                </Field>
-              )}
-            />
-            <Controller
-              name="expatRelief"
-              control={form.control}
-              render={({ field, fieldState }) => (
-                <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel>Expatriate Tax Relief</FieldLabel>
-                  <RadioGroupChoiceCard
-                    value={field.value}
-                    onValueChange={field.onChange}
-                    name={field.name}
-                  />
-                  {fieldState.invalid && (
-                    <FieldError errors={[fieldState.error]} />
-                  )}
-                </Field>
-              )}
-            />
-            <Controller
-              name="familyStatus"
-              control={form.control}
-              render={({ field, fieldState }) => (
-                <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel>Family Status</FieldLabel>
-                  <FamilyStatus
-                    value={field.value}
-                    onValueChange={field.onChange}
-                    name={field.name}
-                  />
-                  {fieldState.invalid && (
-                    <FieldError errors={[fieldState.error]} />
-                  )}
-                </Field>
-              )}
-            />
+    <div className="rounded-xl border border-border bg-card p-6">
+      <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-5">
+        Your Information
+      </h3>
+      <FieldGroup>
+        <Controller
+          name="grossIncome"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <Field data-invalid={fieldState.invalid}>
+              <FieldLabel
+                htmlFor="gross-income"
+                className="text-sm font-medium text-foreground"
+              >
+                Annual Gross Salary
+              </FieldLabel>
+              <div className="relative">
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground text-xl">
+                  €
+                </span>
+                <Input
+                  id="gross-income"
+                  type="text"
+                  value={field.value.toLocaleString()}
+                  onChange={(e) => {
+                    const value = e.target.value.replace(/[^0-9]/g, "");
+                    const numValue = value === "" ? 0 : parseInt(value, 10);
+                    field.onChange(numValue);
+                  }}
+                  aria-invalid={fieldState.invalid}
+                  autoComplete="off"
+                  className="pl-12 h-12 text-lg font-mono bg-card border-border"
+                />
+              </div>
+              <Slider
+                value={[field.value]}
+                onValueChange={(values) => field.onChange(values[0])}
+                min={0}
+                max={200000}
+                step={1000}
+                className="mt-4"
+              />
+              <div className="flex justify-between text-xs text-muted-foreground mt-2">
+                <span>€0</span>
+                <span>€100,000</span>
+                <span>€200,000</span>
+              </div>
+              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+            </Field>
+          )}
+        />
+        <Controller
+          name="expatRelief"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <Field data-invalid={fieldState.invalid}>
+              <FieldLabel className="text-sm font-medium text-foreground">
+                Expatriate Tax Relief
+              </FieldLabel>
+              <RadioGroupChoiceCard
+                value={field.value}
+                onValueChange={field.onChange}
+                name={field.name}
+              />
+              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+            </Field>
+          )}
+        />
+        <Controller
+          name="familyStatus"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <Field data-invalid={fieldState.invalid}>
+              <FieldLabel className="text-sm font-medium text-foreground">
+                Family Status
+              </FieldLabel>
+              <FamilyStatus
+                value={field.value}
+                onValueChange={field.onChange}
+                name={field.name}
+              />
+              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+            </Field>
+          )}
+        />
 
-            <Controller
-              name="numberOfChildren"
-              control={form.control}
-              render={({ field, fieldState }) => (
-                <Field data-invalid={fieldState.invalid}>
-                  <div className="flex flex-row w-full gap-5">
-                    <div className="w-full">
-                      <FieldLabel>Total Number of Children</FieldLabel>
+        <Controller
+          name="numberOfChildren"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <Field data-invalid={fieldState.invalid}>
+              <div className="flex flex-col w-full gap-5">
+                <div className="w-full">
+                  <FieldLabel className="text-sm font-medium text-foreground">
+                    Total Number of Children
+                  </FieldLabel>
+                  <Input
+                    type="number"
+                    min="0"
+                    value={field.value}
+                    onChange={(e) => field.onChange(Number(e.target.value))}
+                    className="h-12 bg-card border-border"
+                  />
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </div>
+                <div className="w-full">
+                  <FieldLabel className="text-sm font-medium text-foreground">
+                    Number of Dependent Children
+                  </FieldLabel>
+                  <Controller
+                    name="numberOfDependentChildren"
+                    control={form.control}
+                    render={({ field: depField }) => (
                       <Input
                         type="number"
                         min="0"
-                        value={field.value}
-                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        value={depField.value}
+                        onChange={(e) => {
+                          const depValue = Number(e.target.value);
+                          depField.onChange(depValue);
+                          // If dependent > total, update total to match
+                          if (
+                            depValue > (watchedValues.numberOfChildren ?? 0)
+                          ) {
+                            form.setValue("numberOfChildren", depValue);
+                          }
+                        }}
+                        className="h-12 bg-card border-border"
                       />
-                      {fieldState.invalid && (
-                        <FieldError errors={[fieldState.error]} />
-                      )}
-                    </div>
-                    <div className="w-full">
-                      <FieldLabel>Number of Dependent Children</FieldLabel>
-                      <Controller
-                        name="numberOfDependentChildren"
-                        control={form.control}
-                        render={({ field: depField }) => (
-                          <Input
-                            type="number"
-                            min="0"
-                            value={depField.value}
-                            onChange={(e) => {
-                              const depValue = Number(e.target.value);
-                              depField.onChange(depValue);
-                              // If dependent > total, update total to match
-                              if (
-                                depValue > (watchedValues.numberOfChildren ?? 0)
-                              ) {
-                                form.setValue("numberOfChildren", depValue);
-                              }
-                            }}
-                          />
-                        )}
-                      />
-                      {fieldState.invalid && (
-                        <FieldError errors={[fieldState.error]} />
-                      )}
-                    </div>
-                  </div>
-                  {watchedValues.numberOfDependentChildren &&
-                  watchedValues.numberOfDependentChildren > 0 ? (
-                    <ChildrenTable
-                      numberOfDependentChildren={Number(
-                        watchedValues.numberOfDependentChildren,
-                      )}
-                      numberOfChildren={Number(watchedValues.numberOfChildren)}
-                      grossIncome={Number(watchedValues.grossIncome)}
-                      familyStatus={watchedValues.familyStatus || "single"}
-                    />
-                  ) : null}
-                </Field>
-              )}
-            />
-          </FieldGroup>
-        </CardContent>
-      </Card>
+                    )}
+                  />
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </div>
+              </div>
+              {watchedValues.numberOfDependentChildren &&
+              watchedValues.numberOfDependentChildren > 0 ? (
+                <ChildrenTable
+                  numberOfDependentChildren={Number(
+                    watchedValues.numberOfDependentChildren,
+                  )}
+                  numberOfChildren={Number(watchedValues.numberOfChildren)}
+                  grossIncome={Number(watchedValues.grossIncome)}
+                  familyStatus={watchedValues.familyStatus || "single"}
+                />
+              ) : null}
+            </Field>
+          )}
+        />
+      </FieldGroup>
     </div>
   );
 }

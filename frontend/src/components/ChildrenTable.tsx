@@ -36,37 +36,41 @@ export default function ChildrenTable({
       <table className="w-full text-sm">
         <tbody>
           {numberOfDependentChildren >= 1 ? (
-            <tr className="border-b border-gray-200">
-              <td className="py-3 text-gray-600">1st Child</td>
-              <td className="py-3 text-right font-medium">€1.000 per parent</td>
+            <tr className="border-b border-border">
+              <td className="py-3 text-muted-foreground">1st Child</td>
+              <td className="py-3 text-right font-medium text-foreground">
+                €1.000 per parent
+              </td>
             </tr>
           ) : null}
           {numberOfDependentChildren >= 2 ? (
-            <tr className="border-b border-gray-200">
-              <td className="py-3 text-gray-600">2nd Child</td>
-              <td className="py-3 text-right font-medium">€1.250 per parent</td>
+            <tr className="border-b border-border">
+              <td className="py-3 text-muted-foreground">2nd Child</td>
+              <td className="py-3 text-right font-medium text-foreground">
+                €1.250 per parent
+              </td>
             </tr>
           ) : null}
           {numberOfDependentChildren >= 3 ? (
-            <tr className="border-b border-gray-200">
-              <td className="py-3 text-gray-600">
+            <tr className="border-b border-border">
+              <td className="py-3 text-muted-foreground">
                 3rd+ Child (×{numberOfDependentChildren - 2})
               </td>
-              <td className="py-3 text-right font-medium">
+              <td className="py-3 text-right font-medium text-foreground">
                 €{(numberOfDependentChildren - 2) * 1500} per parent
               </td>
             </tr>
           ) : null}
           <tr>
-            <td className="py-3 font-semibold text-gray-900 text-lg">
+            <td className="py-3 font-semibold text-foreground text-lg">
               Deduction
             </td>
             {deduction ? (
-              <td className="py-3 text-right font-bold text-lg">
+              <td className="py-3 text-right font-bold text-lg text-foreground">
                 €{deduction}
               </td>
             ) : (
-              <td className="text-red-500 text-sm py-3 text-right">
+              <td className="text-destructive text-sm py-3 text-right">
                 Income exceeds the limit for this family status
               </td>
             )}
@@ -79,7 +83,7 @@ export default function ChildrenTable({
         <li>3-4 children: 150.000</li>
         <li>5+ children: 200.000</li>
         {familyStatus == "single" && (
-          <li>For divorced parents who don't live with the children: 40.000</li>
+          <li>For divorced parents who don't have custody : 40.000</li>
         )}
         {familyStatus == "single_parent" && (
           <li>For single parents: deductions are doubled</li>

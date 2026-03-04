@@ -18,7 +18,7 @@ export function FamilyStatus({
       value={value}
       onValueChange={onValueChange}
       name={name}
-      className="max-w-full flex flex-row"
+      className="max-w-full flex flex-col"
     >
       <FieldLabel htmlFor="single">
         <Field orientation="horizontal">
@@ -32,7 +32,9 @@ export function FamilyStatus({
       <FieldLabel htmlFor="family">
         <Field orientation="horizontal">
           <FieldContent>
-            <FieldTitle>Family</FieldTitle>
+            <FieldTitle className="text-center content-center">
+              Family
+            </FieldTitle>
           </FieldContent>
           <RadioGroupItem value="family" id="family" />
         </Field>

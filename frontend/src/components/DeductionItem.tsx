@@ -14,20 +14,20 @@ export default function DeductionItem({
   numOfMonths,
 }: DeductionItemProps) {
   return (
-    <div className="flex flex-row w-full items-center justify-between p-4 hover:bg-gray-50 border-b border-gray-200">
+    <div className="flex flex-row w-full items-center justify-between p-4 hover:bg-muted/50 border-b border-border">
       <div className="flex flex-col h-full items-start gap-1">
-        <ItemTitle className="font-bold text-slate-900">
+        <ItemTitle className="font-bold text-foreground">
           {deductionName}
         </ItemTitle>
-        <ItemDescription className="text-xs text-slate-500">
+        <ItemDescription className="text-xs text-muted-foreground">
           {deductionDescription}
         </ItemDescription>
       </div>
       <div className="flex flex-col items-end gap-1">
-        <ItemTitle className="font-semibold text-slate-700 text-lg">
+        <ItemTitle className="font-semibold text-foreground text-lg">
           €{deductionValue}
         </ItemTitle>
-        <ItemDescription className="text-xs text-slate-500">
+        <ItemDescription className="text-xs text-muted-foreground">
           €{(Number(deductionValue) / Number(numOfMonths)).toFixed(2)}
         </ItemDescription>
       </div>

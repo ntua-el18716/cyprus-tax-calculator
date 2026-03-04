@@ -23,7 +23,7 @@ export function RadioGroupChoiceCard({
       value={value}
       onValueChange={onValueChange}
       name={name}
-      className="max-w-full flex flex-row"
+      className="max-w-full flex flex-col"
     >
       <FieldLabel htmlFor="expat-0">
         <Field orientation="horizontal">
